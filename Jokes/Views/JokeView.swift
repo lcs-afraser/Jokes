@@ -13,10 +13,14 @@ struct JokeView: View {
     
     //0.0 is invisible, 1.0 is visible
     @State var punchlineOpacity = 0.0
+    
+    //The current joke to display
+    @State var currentJoke = exampleJoke
+    
     var body: some View {
         NavigationView {
             VStack {
-                Text("You see, mountains aren't just funny")
+                Text(currentJoke.setup)
                     .font(.title)
                     .multilineTextAlignment(.center)
                 
@@ -31,7 +35,7 @@ struct JokeView: View {
                         .frame(width: 40)
                         .tint(.black)
                 })
-                Text("They are hill areas")
+                Text(currentJoke.punchline)
                     .font(.title)
                     .multilineTextAlignment(.center)
                     .opacity(punchlineOpacity)
