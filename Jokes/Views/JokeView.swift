@@ -21,6 +21,9 @@ struct JokeView: View {
     //The current joke to display
     @State var currentJoke: Joke?
     
+    //Track whether current joke has been saved to database
+    @State var savedToDatabase = false
+    
     //MARK: Computed properties
     var body: some View {
         NavigationView {
@@ -66,6 +69,9 @@ struct JokeView: View {
                             currentJoke = nil
                         }
                         currentJoke = await NetworkService.fetch()
+                        
+                        //Rest so that button to allow saving new joke to database is enabled
+                        savedToDatabase = false
                     }
                 }, label: {
                     Text("Fetch another one")
@@ -84,6 +90,9 @@ struct JokeView: View {
                                                currentJoke.type,
                                                currentJoke.setup,
                                                currentJoke.punchline)
+                                
+                                //Record that this joke has been saved
+                                savedToDatabase = true
                             }
                         }
                     }
@@ -92,6 +101,8 @@ struct JokeView: View {
                 })
                 //Disable button until punchline is shown
                 .disabled(punchlineOpacity == 0.0 ? true : false)
+                //Once saved disable the button so it cant be saved twice
+                .disabled(savedToDatabase == true ? true : false)
                 //Use another colour to differentiate from first button
                 .tint(.green)
                 .buttonStyle(.borderedProminent)
