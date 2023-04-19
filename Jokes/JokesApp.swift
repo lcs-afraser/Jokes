@@ -11,7 +11,17 @@ import SwiftUI
 struct JokesApp: App {
     var body: some Scene {
         WindowGroup {
-            JokeView()
+            TabView {
+                JokeView()
+                    .tabItem {
+                        Label("Fresh", systemImage: "carrot")
+                    }
+                
+                FavouritesView()
+                    .tabItem {
+                        Label("Favourites", systemImage: "face.smiling")
+                    }
+            }
             //Make the database avaliable to all child views through the environment
                 .environment(\.blackbirdDatabase, AppDatabase.instance)
         }
