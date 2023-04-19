@@ -107,7 +107,7 @@ struct JokeView: View {
                 .tint(.green)
                 .buttonStyle(.borderedProminent)
             }
-            .navigationTitle("Random Jokes")
+            .navigationTitle("Fresh Jokes")
         }
         //Create an asynchronous task to be performed as this view appears
         .task {
