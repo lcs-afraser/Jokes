@@ -36,6 +36,7 @@ struct JokeView: View {
                     Text(currentJoke.setup)
                         .font(.title)
                         .multilineTextAlignment(.center)
+                        .bold()
                     
                     Button(action:  {
                         withAnimation(.easeIn(duration: 1.0)) {
